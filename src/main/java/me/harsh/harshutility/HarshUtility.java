@@ -7,7 +7,6 @@ public final class HarshUtility extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        System.out.println("EZ4ENCE STARTED!");
     }
 
     public static String colorize(String raw){

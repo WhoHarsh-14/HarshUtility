@@ -1,4 +1,4 @@
-name: MenuLib
+name: HarshUtility
 version: '1.0-SNAPSHOT'
 main: me.harsh.harshutility.HarshUtility
 api-version: '1.21'

@@ -11,7 +11,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CommandGroup implements CommandExecutor, TabCompleter {
+public class CommandGroup implements CommandExecutor, TabCompleter {
+
     final List<SubCommand> subCommands;
     final String mainCommandGroup;
 
@@ -24,10 +25,9 @@ public abstract class CommandGroup implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] strings) {
         if (commandSender instanceof Player){
             final Player player = (Player) commandSender;
-            if (strings.length == 1 && strings[0].equalsIgnoreCase(mainCommandGroup)){
+            if (strings.length == 1 && s.equalsIgnoreCase(mainCommandGroup)){
                 for (SubCommand subCommand : subCommands) {
-                    if (subCommand.getCommand().equalsIgnoreCase(strings[1])){
-                        final String[] a = remove(strings.clone(), 0);
+                    if (subCommand.getCommand().equalsIgnoreCase(strings[0])){
                         final String[] args = remove(strings.clone(), 0);
                         subCommand.onCommand(player,args);
                     }
@@ -52,6 +52,10 @@ public abstract class CommandGroup implements CommandExecutor, TabCompleter {
             commands.add(subCommand.getCommand());
         }
         return commands;
+    }
+
+    public String getMainCommandGroup() {
+        return mainCommandGroup;
     }
 
     public String[] remove(String[] arr, int in) {
